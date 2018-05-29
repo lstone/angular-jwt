@@ -167,10 +167,12 @@ angular
 
       ...
 
-      whiteListedDomains: [/api-version-\d+.myapp.com$/i, 'localhost']
+      whiteListedDomains: [/^api-version-\d+.myapp.com$/i, 'localhost']
     });
   });
 ```
+
+Regular expressions should be as strict as possible to prevent attackers from registering their own malicious domains to bypass the whitelist.
 
 ### Not Sending the JWT for Template Requests
 
