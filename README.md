@@ -167,7 +167,7 @@ angular
 
       ...
 
-      whiteListedDomains: [/^api-version-\d+.myapp.com$/i, 'localhost']
+      whiteListedDomains: [/^api-version-\d+\.myapp\.com$/i, 'localhost']
     });
   });
 ```
