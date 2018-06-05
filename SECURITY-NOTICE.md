@@ -6,7 +6,7 @@
 
 ### Description
 
-The [domain whitelisting](https://github.com/auth0/angular-jwt#whitelisting-domains) feature can be bypassed. For example, Ii the setting is initialized with 
+The [domain whitelisting](https://github.com/auth0/angular-jwt#whitelisting-domains) feature can be bypassed. For example, if the setting is initialized with 
 
 ```js
 jwtInterceptorProvider.whiteListedDomains = ['whitelisted.Example.com'];
