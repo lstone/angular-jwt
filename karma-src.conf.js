@@ -17,7 +17,6 @@ module.exports = function(config) {
       'karma-chai',
       'karma-sinon-chai',
       'karma-chrome-launcher',
-      'karma-phantomjs-launcher',
       'karma-jquery',
       'karma-chai-jquery',
       'karma-mocha-reporter'
