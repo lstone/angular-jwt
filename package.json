@@ -9,7 +9,7 @@
     "email": "martin@gon.to"
   },
   "scripts": {
-    "test": "gulp test-src"
+    "test": "karma start karma-src.conf.js --single-run"
   },
   "repository": {
     "type": "git",
