@@ -178,4 +178,51 @@ describe('interceptor', function() {
     });
 
   });
+
+  it('should handle an undefined responseError', function (done) {
+    module( function($httpProvider, jwtOptionsProvider, jwtInterceptorProvider) {
+      jwtInterceptorProvider.tokenGetter = function() {
+        return 123;
+      }
+      $httpProvider.interceptors.push('jwtInterceptor');
+    });
+
+    inject(function (jwtInterceptor, $httpBackend) {
+      jwtInterceptor.responseError(undefined).then(function (data) {
+
+      }).catch(function (data) {
+        expect(data).to.be.equal(undefined);
+        done();
+      });
+
+      $httpBackend.flush();
+    });
+  });
+
+  it('should broadcast unauthenticated on 401 response', function (done) {
+    module( function ($httpProvider, jwtInterceptorProvider, jwtOptionsProvider, $rootScopeProvider) {
+      jwtInterceptorProvider.tokenGetter = function() {
+        return 123;
+      }
+      $httpProvider.interceptors.push('jwtInterceptor');
+    });
+
+    inject(function ($http, $httpBackend, $rootScope) {
+      sinon.spy($rootScope, "$broadcast");
+
+      $http({url: '/hello'}).then(function (data) {
+
+      }).catch(function (data) {
+        expect(data.status).to.be.equal(401);
+        expect($rootScope.$broadcast.calledWith("unauthenticated")).to.be.true
+        done();
+      });
+      $httpBackend.expectGET('/hello', function (headers) {
+        return headers.Authorization === 'Bearer 123';
+      }).respond(401, {}, {}, 'Error');
+      
+      $httpBackend.flush();
+    });
+
+  });
 });
