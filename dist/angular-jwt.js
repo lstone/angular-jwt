@@ -100,7 +100,8 @@ angular.module('angular-jwt.authManager', [])
         var route = transition.to();
         var $state = transition.router.stateService;
           if (route && route.data && route.data.requiresLogin === true && !isAuthenticated()) {
-            return $state.target(config.loginPath);
+            var loginPath = config.loginPath();
+            return $state.target(loginPath);
           }
       }
 
@@ -285,7 +286,9 @@ angular.module('angular-jwt.options', [])
         tokenGetter: function() {
           return null;
         },
-        loginPath: '/',
+        loginPath: function() {
+          return '/';
+        },
         unauthenticatedRedirectPath: '/',
         unauthenticatedRedirector: ['$location', function($location) {
           $location.path(this.unauthenticatedRedirectPath);

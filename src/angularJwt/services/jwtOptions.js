@@ -14,7 +14,9 @@ angular.module('angular-jwt.options', [])
         tokenGetter: function() {
           return null;
         },
-        loginPath: '/',
+        loginPath: function() {
+          return '/';
+        },
         unauthenticatedRedirectPath: '/',
         unauthenticatedRedirector: ['$location', function($location) {
           $location.path(this.unauthenticatedRedirectPath);
