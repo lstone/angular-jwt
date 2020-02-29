@@ -84,8 +84,8 @@ angular.module('angular-jwt.authManager', [])
         var route = transition.to();
         var $state = transition.router.stateService;
           if (route && route.data && route.data.requiresLogin === true && !isAuthenticated()) {
-            var loginPath = config.loginPath();
-            return $state.target(loginPath);
+            var loginPath = config.loginPath;
+            return $state.target(loginPath.stateName, loginPath.stateParams);
           }
       }
 
